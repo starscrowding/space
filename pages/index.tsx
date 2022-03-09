@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useTheme as useNextTheme } from 'next-themes'
-import { Switch, useTheme } from '@nextui-org/react'
+import { useTheme as useNextTheme } from 'next-themes';
+import { Switch, useTheme } from '@nextui-org/react';
 import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
@@ -17,12 +17,12 @@ const Home: NextPage = () => {
         checked={isDark}
         onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
       />
+
       <Head>
         <title>strascrowding | grow * influence</title>
         <meta name="description" content="Tech company that drives improvements via blockchain." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className={styles.main}>
 
         <h1 className={styles.title}>
