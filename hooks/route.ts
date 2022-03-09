@@ -23,7 +23,7 @@ export const redirect = (ctx: NextPageContext) => ({
     }
 });
 
-export const useAdmin = ({
+export const isAdmin = ({
     ctx,
     redirectUrl = '/'
 }: useUserProps) => {
