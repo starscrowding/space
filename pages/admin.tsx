@@ -1,8 +1,13 @@
 import type { NextPage, NextPageContext } from 'next';
 import { isAdmin } from '../hooks/route';
+import { MintToken } from '../components/Token';
 
 const Admin: NextPage = () => {
-    return <div>Admin only</div>;
+    return <div>
+        <div>Admin only</div>
+
+        <MintToken />
+    </div>;
 };
 
 export async function getServerSideProps(ctx: NextPageContext) {
