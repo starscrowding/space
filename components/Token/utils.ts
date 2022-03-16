@@ -1,4 +1,3 @@
-
 export const detectCanvas = (imageData: ImageData, threshold: number, radius: number, mode: boolean) => {
     const data = imageData.data;
     const length = imageData.width;
@@ -34,3 +33,21 @@ export function formatImageData(imageData: ImageData) {
     }
     return data;
 }
+
+export const dataUrlToImageData = (dataUrl: string) => {
+    return new Promise(function (resolve, reject) {
+        if (dataUrl == null) return reject();
+        var canvas = document.createElement('canvas'),
+            ctx = canvas.getContext('2d'),
+            image = new Image();
+        image.addEventListener('load', function () {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx?.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(ctx?.getImageData(0, 0, canvas.width, canvas.height));
+        }, false);
+        image.src = dataUrl;
+    });
+}
+
+

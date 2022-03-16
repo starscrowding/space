@@ -7,7 +7,7 @@ const RADIUS = 1;
 const SEGMENTS = 128;
 const THICKNESS = RADIUS / 9;
 
-export default class TokenController {
+export class TokenController {
     container: Element;
     imageData: ImageData;
     renderer: THREE.WebGLRenderer | null;

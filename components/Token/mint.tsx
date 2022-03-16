@@ -1,21 +1,22 @@
 import { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { detectCanvas } from './utils';
-import TokenController from './controller';
-
+import { Token } from './view';
 
 export const MintToken = () => {
+    const [step, setStep] = useState('start');
     const editor = useRef<any>();
     const canvas = useRef<HTMLCanvasElement & any>();
-    const container = useRef<Element & any>();
     const [file, setFile] = useState<File>();
     const [scale, setScale] = useState(1);
-    const [imageData, setImageData] = useState<ImageData & any>();
+    const [imageData, setImageData] = useState<ImageData | undefined>();
+    const [dataUrl, setDataUrl] = useState<string | undefined>();
     const size = 300;
     const threshold = 200;
 
     const onSelectFile = (e: EventTarget & any) => {
         setFile(e.target.files[0]);
+        setStep('crop');
     };
 
     const crop = () => {
@@ -24,36 +25,47 @@ export const MintToken = () => {
         const ctx = canvas?.current?.getContext('2d');
         ctx.putImageData(editorImageData, 0, 0);
         setImageData(editorImageData);
+        setStep('draw');
     }
 
     const draw = (thr = threshold) => {
-        canvas.current.width = imageData.width;
-        canvas.current.height = imageData.width;
-        const ctx = canvas?.current?.getContext('2d');
-        const tmpImageData = ctx.getImageData(0, 0, imageData.width, imageData.height);
-        tmpImageData.data.set(detectCanvas(
-            {
-                data: new Uint8ClampedArray(imageData.data),
-                width: imageData.width,
-                height: imageData.height
-            },
-            thr,
-            1,
-            true,
-        ).data);
-        ctx.putImageData(tmpImageData, 0, 0);
+        if (imageData) {
+            canvas.current.width = imageData?.width;
+            canvas.current.height = imageData?.width;
+            const ctx = canvas?.current?.getContext('2d');
+            const tmpImageData = ctx.getImageData(0, 0, imageData?.width, imageData?.height);
+            tmpImageData.data.set(detectCanvas(
+                {
+                    data: new Uint8ClampedArray(imageData?.data),
+                    width: imageData?.width,
+                    height: imageData?.height
+                },
+                thr,
+                1,
+                true,
+            ).data);
+            ctx.putImageData(tmpImageData, 0, 0);
+            setStep('preview');
+        }
     };
 
     const set = () => {
-        const ctx = canvas?.current?.getContext('2d');
-        const ctxImageData = ctx.getImageData(0, 0, imageData.width, imageData.height);
-        setImageData(ctxImageData);
-        new TokenController(container.current, ctxImageData);
+        setDataUrl(canvas?.current?.toDataURL());
+        setStep('view');
     };
 
     return (<div>
-        <div className="btn">Image<input type="file" className="file" accept="image/*" onChange={onSelectFile} /></div>
-        {file && <div>
+        <div>
+            <button onClick={() => setStep('start')}>Start</button>
+            <button onClick={crop}>Crop</button>
+            <button onClick={() => draw(threshold)}>Draw</button>
+            <button onClick={set}>Set</button>
+        </div>
+        <canvas ref={canvas} width={size} height={size} style={{ display: step === 'draw' || step === 'preview' ? 'block' : 'none' }} />
+        {step === 'start' && <>
+            <div className="btn">Image<input type="file" className="file" accept="image/*" onChange={onSelectFile} /></div>
+        </>}
+        {step === 'crop' && file && <div>
             <div>
                 <AvatarEditor
                     image={file}
@@ -77,21 +89,16 @@ export const MintToken = () => {
                 />
             </div>
         </div>}
-        <div>
-            <button onClick={crop}>Crop</button>
-            <button onClick={() => draw(threshold)}>Draw</button>
-            <button onClick={set}>Set</button>
-        </div>
-        {imageData && <input
-            name="threshold"
-            type="range"
-            onChange={(e) => draw(+e.target.value)}
-            min="1"
-            max="250"
-            step="1"
-            defaultValue={threshold}
-        />}
-        <canvas ref={canvas} width={size} height={size} />
-        <div ref={container} style={{ height: '500px' }} />
-    </div >);
+        {step === 'preview' && imageData && <div>
+            <input
+                name="threshold"
+                type="range"
+                onChange={(e) => draw(+e.target.value)}
+                min="1"
+                max="250"
+                step="1"
+                defaultValue={threshold}
+            /></div>}
+        {step === 'view' && dataUrl && <Token dataUrl={dataUrl} style={{ height: '500px' }} />}
+    </div>);
 };
