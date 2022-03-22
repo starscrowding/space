@@ -12,7 +12,10 @@ export const Token = ({ dataUrl, style }: TokenProps) => {
 
     useEffect(() => {
         if (dataUrl) {
-            dataUrlToImageData(dataUrl).then((imageData) => new TokenController(container.current, imageData as ImageData));
+            dataUrlToImageData(dataUrl).then((imageData) => new TokenController({
+                container: container.current,
+                imageData: imageData as ImageData
+            }));
         }
     }, [dataUrl]);
 

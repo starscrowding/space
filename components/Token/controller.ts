@@ -18,14 +18,18 @@ export class TokenController {
     reqID?: number;
     resize: () => void;
 
-    constructor(container: Element, imageData: ImageData) {
-        this.container = container;
-        this.imageData = imageData;
+    constructor(props: {
+        container: Element,
+        imageData: ImageData,
+        material?: THREE.MeshStandardMaterialParameters
+    }) {
+        this.container = props.container;
+        this.imageData = props.imageData;
         this.renderer = null;
 
         this.initRenderer();
         this.initScene();
-        this.initMaterial();
+        this.initMaterial(props.material);
         this.initTokenRing();
         this.initTokenPattern();
         this.initLight();
@@ -55,12 +59,12 @@ export class TokenController {
         this.scene = new THREE.Scene();
     }
 
-    initMaterial() {
-        this.material = new THREE.MeshStandardMaterial({
-            roughness: 0.7,
-            metalness: 1,
-            color: 16761685,
-        });
+    initMaterial(materialProps: THREE.MeshStandardMaterialParameters | undefined = {
+        roughness: 0.7,
+        metalness: 1,
+        color: 16761685,
+    }) {
+        this.material = new THREE.MeshStandardMaterial(materialProps);
     }
 
     initTokenRing() {
