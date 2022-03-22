@@ -1,4 +1,4 @@
-import type { NextPage, NextPageContext } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import { isAdmin } from '../hooks/route';
 import { MintToken } from '../components/Token';
 

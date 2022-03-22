@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import { useTheme as useNextTheme } from 'next-themes';
 import { Switch, useTheme } from '@nextui-org/react';

@@ -11,8 +11,10 @@ export const Token = ({ dataUrl, style }: TokenProps) => {
     const container = useRef<HTMLDivElement & any>();
 
     useEffect(() => {
-        dataUrlToImageData(dataUrl).then((imageData) => new TokenController(container.current, imageData as ImageData));
-    }, []);
+        if (dataUrl) {
+            dataUrlToImageData(dataUrl).then((imageData) => new TokenController(container.current, imageData as ImageData));
+        }
+    }, [dataUrl]);
 
     return (
         <div ref={container} style={style} />
