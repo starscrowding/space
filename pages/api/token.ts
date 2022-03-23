@@ -12,6 +12,9 @@ export default function handler(
   const isOK = !!req.body;
   if (isOK) {
     setCookie({ res }, 'token', req.body, {
+      secure: true,
+      httpOnly: true,
+      sameSite: true,
       path: '/',
       maxAge: 11 * 24 * 60 * 60,
     });
