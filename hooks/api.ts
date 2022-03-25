@@ -1,7 +1,8 @@
 export const ENDPOINT = {
-    token: '/api/token',
-    
-}
+    token: {
+        set: '/api/token/set'
+    },
+};
 
 export const api = async (url: RequestInfo, params?: RequestInit) => {
     return fetch(url, params).then(res => res.json());

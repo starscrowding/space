@@ -19,8 +19,8 @@ const Home: NextPage = () => {
       />
 
       <Head>
-        <title>strascrowding | grow * influence</title>
-        <meta name="description" content="Tech company that drives improvements via blockchain." />
+        <title>strascrowding | tokens exchange space - grow * influence</title>
+        <meta name="description" content="Tech company that drives improvements via web3 and blockchain." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>

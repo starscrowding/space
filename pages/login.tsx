@@ -15,7 +15,7 @@ const Login: NextPage = () => {
             const now = Date.now().toString();
             const msg = now.slice(0, 4) + '0'.repeat(now.length - 4);
             const token = Base64.stringify(hmacSHA512(msg, input));
-            const result = await post(ENDPOINT.token, token);
+            const result = await post(ENDPOINT.token.set, token);
             if (result && result.ok) {
                 router.push('/admin');
             }

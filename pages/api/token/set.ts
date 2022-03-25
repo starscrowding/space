@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { setCookie } from 'nookies';
 
-interface Data {
-  ok: boolean
+interface Result {
+  ok: boolean;
 }
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Result>
 ) {
   const isOK = !!req.body;
   if (isOK) {
