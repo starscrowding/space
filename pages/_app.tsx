@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
-import { createTheme, NextUIProvider } from "@nextui-org/react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { createTheme, NextUIProvider } from '@nextui-org/react';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { Stars } from '@space/components/Stars';
 import variables from '../styles/variables.module.scss';
 
 const baseTheme = {
@@ -26,14 +27,16 @@ const darkTheme = createTheme({
 function SpaceApp({ Component, pageProps }: AppProps) {
   return (
     <NextThemesProvider
-      defaultTheme="system"
+      enableSystem={false}
+      defaultTheme='dark'
       attribute="class"
       value={{
+        dark: darkTheme.className,
         light: lightTheme.className,
-        dark: darkTheme.className
       }}
     >
       <NextUIProvider>
+        <Stars />
         <Component {...pageProps} />
       </NextUIProvider>
     </NextThemesProvider>

@@ -6,7 +6,7 @@ import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
   const { setTheme } = useNextTheme();
-  const { isDark, type } = useTheme();
+  const { isDark } = useTheme();
 
   return (
     <div className={styles.container}>
@@ -30,18 +30,18 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Our mission is to <b>grow</b> <code className={styles.code}>technologies</code> that allow people to <b>influence</b> improvements.
+          Our mission is to <b>grow</b> <code className={styles.code}>technologies</code> that allow people to <b>influence</b> improvements
         </p>
 
         <div className={styles.grid}>
           <a href="#" className={styles.card}>
-            <h2>About 📄</h2>
-            <p>Find in-depth information about the project.</p>
+            <h2>About 🔭</h2>
+            <p>Find in-depth information about the tokens exchange space.</p>
           </a>
 
           <a href="#" className={styles.card}>
-            <h2>Help 🤝</h2>
-            <p>How to use the web3 and DeFi for good.</p>
+            <h2>Charity 🎗️</h2>
+            <p>How to use web3 and DeFi for the Good.</p>
           </a>
 
           <a
