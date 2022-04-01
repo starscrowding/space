@@ -213,7 +213,7 @@ export class TokenController {
         this.renderer?.setSize(this.imageData.width, this.imageData.height);
     }
 
-    getPngBlob(callback: (blob: Blob | null) => void) {
+    getPngBlob(blobCb?: (blob: Blob | null) => void) {
         this.resize4Save();
         this.pause();
         this.cameraCtrl.saveState();
@@ -223,15 +223,16 @@ export class TokenController {
         if (this.scene && this.camera) {
             this.renderer?.render(this.scene, this.camera);
         }
-        setTimeout(() => { // for low spec devices
+        setTimeout(() => {
             this.renderer?.domElement.toBlob((blob: Blob | null) => {
-                callback(blob);
+                blobCb?.(blob);
                 this.cameraCtrl.reset();
                 this.cameraCtrl.enabled = true;
                 this.resize();
                 this.play();
             });
         });
+        return this.renderer?.domElement.toDataURL();
     }
 
 }

@@ -25,11 +25,11 @@ const Login: NextPage = () => {
     }, [input, router]);
 
     return <form onSubmit={onSubmit}>
-        <Input id='token'
+        <Input id="token"
             placeholder="Token"
             clearable
             bordered
-            width='100%'
+            width="100%"
             css={{ p: '$10' }}
             onChange={e => setInput(e?.target?.value || '')} />
     </form>;

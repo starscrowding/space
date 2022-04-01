@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "@alch/alchemy-web3": "^1.3.0",
+    "classnames": "^2.3.1",
     "crypto-js": "^4.1.1",
     "mongoose": "^6.2.7",
     "next": "12.0.10",
     "next-themes": "^0.0.15",
+    "nft.storage": "^6.1.0",
     "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-avatar-editor": "^12.0.0",

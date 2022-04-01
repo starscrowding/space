@@ -2,7 +2,8 @@ import type { AppProps } from 'next/app';
 import { createTheme, NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { Stars } from '@space/components/Stars';
-import variables from '../styles/variables.module.scss';
+import variables from '@space/styles/variables.module.scss';
+import app from '@space/styles/app.module.scss';
 
 const baseTheme = {
   colors: {
@@ -37,7 +38,9 @@ function SpaceApp({ Component, pageProps }: AppProps) {
     >
       <NextUIProvider>
         <Stars />
-        <Component {...pageProps} />
+        <div className={app.space}>
+          <Component {...pageProps} />
+        </div>
       </NextUIProvider>
     </NextThemesProvider>
   );

@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useTheme as useNextTheme } from 'next-themes';
-import { Switch, useTheme } from '@nextui-org/react';
+import { useTheme, Switch, Text } from '@nextui-org/react';
+import classnames from 'classnames';
 import styles from '../styles/home.module.scss';
 
 const Home: NextPage = () => {
@@ -26,17 +27,27 @@ const Home: NextPage = () => {
       <main className={styles.main}>
 
         <h1 className={styles.title}>
-          welcome to <a href="#">starscrowding</a>
+          welcome to <a href="#">
+            <Text
+              size={'4rem'}
+              css={{
+                display: 'inline',
+                textGradient: '45deg, $pink500 27%, $purple500 42%',
+              }}
+              weight="bold">
+              starscrowding
+            </Text>
+          </a>
         </h1>
 
         <p className={styles.description}>
-          Our mission is to <b>grow</b> <code className={styles.code}>technologies</code> that allow people to <b>influence</b> improvements
+          Our mission is to <b>grow</b> <code className={classnames(styles.code, styles.shadow)}>technologies</code> that allow people to <b>influence</b> improvements
         </p>
 
         <div className={styles.grid}>
           <a href="#" className={styles.card}>
             <h2>About 🔭</h2>
-            <p>Find in-depth information about the tokens exchange space.</p>
+            <p>Find in-depth information about personal tokens space.</p>
           </a>
 
           <a href="#" className={styles.card}>
@@ -49,16 +60,16 @@ const Home: NextPage = () => {
             className={styles.card}
           >
             <h2>Listings ✨</h2>
-            <p>Everyone is a Star.</p>
+            <p>Everyone is a Star. Turn your audience into shareholders.</p>
           </a>
 
           <a
-            href=""
+            href="#"
             className={styles.card}
           >
             <h2>Invest ⚡</h2>
             <p>
-              Light up your Star.
+              Light up your Star. Earn by exchange your favorite tokens.
             </p>
           </a>
         </div>
@@ -67,6 +78,7 @@ const Home: NextPage = () => {
       <footer className={styles.footer}>
         <a
           href="#"
+          className={styles.shadow}
         >
           in code people trust 🚀
         </a>

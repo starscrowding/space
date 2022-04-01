@@ -1,11 +1,20 @@
 import { useRef, useState } from 'react';
 import AvatarEditor from 'react-avatar-editor';
 import { detectCanvas } from './utils';
+import { TokenController } from './controller';
 import { Token } from './view';
 
-export const MintToken = () => {
+interface MintTokenProps {
+    onNext?(meta: {
+        image: string,
+        head: string,
+    }): void
+}
+
+export const MintToken = ({ onNext }: MintTokenProps) => {
     const [step, setStep] = useState('start');
     const editor = useRef<any>();
+    const controller = useRef<TokenController>();
     const canvas = useRef<HTMLCanvasElement & any>();
     const [file, setFile] = useState<File>();
     const [scale, setScale] = useState(1);
@@ -20,12 +29,14 @@ export const MintToken = () => {
     };
 
     const crop = () => {
-        const editorCtx = editor.current.getImageScaledToCanvas().getContext('2d');
-        const editorImageData = editorCtx.getImageData(0, 0, size, size);
-        const ctx = canvas?.current?.getContext('2d');
-        ctx.putImageData(editorImageData, 0, 0);
-        setImageData(editorImageData);
-        setStep('draw');
+        const editorCtx = editor.current?.getImageScaledToCanvas().getContext('2d');
+        if (editorCtx) {
+            const editorImageData = editorCtx.getImageData(0, 0, size, size);
+            const ctx = canvas?.current?.getContext('2d');
+            ctx.putImageData(editorImageData, 0, 0);
+            setImageData(editorImageData);
+            setStep('draw');
+        }
     }
 
     const draw = (thr = threshold) => {
@@ -54,12 +65,20 @@ export const MintToken = () => {
         setStep('view');
     };
 
+    const next = () => {
+        onNext && onNext({
+            image: controller?.current?.getPngBlob() as string,
+            head: dataUrl as string
+        });
+    }
+
     return (<div>
         <div>
             <button onClick={() => setStep('start')}>Start</button>
             <button onClick={crop}>Crop</button>
             <button onClick={() => draw(threshold)}>Draw</button>
             <button onClick={set}>Set</button>
+            <button onClick={next} disabled={!dataUrl}>Next</button>
         </div>
         <canvas ref={canvas} width={size} height={size} style={{ display: step === 'draw' || step === 'preview' ? 'block' : 'none' }} />
         {step === 'start' && <>
@@ -99,6 +118,6 @@ export const MintToken = () => {
                 step="1"
                 defaultValue={threshold}
             /></div>}
-        {step === 'view' && dataUrl && <Token dataUrl={dataUrl} style={{ height: '500px' }} />}
+        {step === 'view' && dataUrl && <Token dataUrl={dataUrl} style={{ height: '500px' }} ctrl={controller} />}
     </div>);
 };

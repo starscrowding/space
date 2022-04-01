@@ -1,3 +1,4 @@
+export const BASE = 'https://starscrowding.com';
 export const ENDPOINT = {
     token: {
         set: '/api/token/set'

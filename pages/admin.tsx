@@ -1,13 +1,45 @@
+import { useEffect, useState } from 'react';
 import { NextPage, NextPageContext } from 'next';
-import { isAdmin } from '../hooks/route';
-import { MintToken } from '../components/Token';
+import { Text } from '@nextui-org/react';
+import { isAdmin } from '@space/hooks/route';
+import { MintToken } from '@space/components/Token';
+import { StoreToken } from '@space/components/Token';
 
 const Admin: NextPage = () => {
-    return <div>
-        <div>Admin only</div>
+    const [step, setStep] = useState('');
+    const [mintMeta, setMintMeta] = useState<{ head: string, image: string }>();
 
-        <MintToken />
-    </div>;
+    const updateStep = (nextStep: string) => {
+        setStep(nextStep);
+        window.location.hash = nextStep;
+    };
+
+    useEffect(() => {
+        const hash = window?.location?.hash;
+        if (hash) {
+            setStep(hash.substring(1));
+        }
+    }, []);
+
+    return (<div>
+        <div><Text color='primary' weight={'bold'}>Admin only</Text></div>
+
+        <div>
+            <button onClick={() => updateStep('mint')}>Mint</button>
+            <button onClick={() => updateStep('store')}>Store</button>
+        </div>
+
+        {step === 'mint' && <>
+            {!mintMeta && <MintToken onNext={setMintMeta} />}
+
+            {mintMeta && <div>
+                Head: <img src={mintMeta.head} />
+                Image: <img src={mintMeta.image} />
+            </div>}
+        </>}
+
+        {step === 'store' && <StoreToken meta={mintMeta} />}
+    </div>);
 };
 
 export async function getServerSideProps(ctx: NextPageContext) {

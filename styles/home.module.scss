@@ -6,12 +6,12 @@
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 3rem;
 }
 
 .footer {
@@ -42,11 +42,9 @@
 
 .title {
   margin: 0;
-  line-height: 1.15;
 
   a {
-    font-size: 4rem;
-    margin-left: 0.5rem;
+    margin-left: 0.123rem;
   }
 }
 
@@ -56,16 +54,20 @@
 }
 
 .description {
-  margin: 4rem 0;
+  margin: 1rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
 }
 
 .code {
-  padding: 0.75rem;
+  padding: 0.5rem;
   color: $base-color;
   background: none;
-  font-size: 1.23rem;
+  font-size: 1.5rem;
+}
+
+.shadow {
+  text-shadow: 2px 2px 7px $blue-color;
 }
 
 .grid {
@@ -117,5 +119,11 @@
   .grid {
     width: 100%;
     flex-direction: column;
+  }
+
+  .title {
+    a {
+      margin-left: 0;
+    }
   }
 }
