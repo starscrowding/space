@@ -78,11 +78,11 @@ export class TokenController {
         );
 
         const frontRing = new THREE.Mesh(ringGeometry, this.material);
-        frontRing.position.z = THICKNESS / 2;
+        frontRing.position.z = THICKNESS / 2 + 0.003;
         scene?.add(frontRing);
 
         const backRing = frontRing.clone();
-        backRing.position.z = -THICKNESS / 2;
+        backRing.position.z = -THICKNESS / 2 - 0.003;
         backRing.rotateY(Math.PI);
         scene?.add(backRing);
 
@@ -92,7 +92,7 @@ export class TokenController {
             THICKNESS,
             SEGMENTS,
             1,
-            true,
+            false,
         );
 
         const outerCylinder = new THREE.Mesh(outerCylinderGeometry, this.material);
@@ -105,7 +105,7 @@ export class TokenController {
             THICKNESS,
             SEGMENTS,
             1,
-            true,
+            false,
         );
 
         const innerCylinder = new THREE.Mesh(innerCylinderGeometry, this.material);
@@ -131,11 +131,11 @@ export class TokenController {
         });
 
         const front0 = new THREE.Mesh(circleGeometry, circleMaterial);
-        front0.position.z = THICKNESS / 4;
+        front0.position.z = THICKNESS / 4 + 0.03;
         scene?.add(front0);
 
         const back0 = front0.clone();
-        back0.position.z = -THICKNESS / 4;
+        back0.position.z = -THICKNESS / 4 - 0.03;
         back0.rotateY(Math.PI);
         scene?.add(back0);
 
@@ -150,11 +150,11 @@ export class TokenController {
         });
 
         const front = new THREE.Mesh(geometry, material);
-        front.position.z = (THICKNESS / 4) + 0.001;
+        front.position.z = (THICKNESS / 4) + 0.031;
         scene?.add(front);
 
         const back = front.clone();
-        back.position.z = -(THICKNESS / 4) - 0.001;
+        back.position.z = -(THICKNESS / 4) - 0.031;
         back.rotateY(Math.PI);
         scene?.add(back);
     }
@@ -163,6 +163,10 @@ export class TokenController {
         const frontLight = new THREE.DirectionalLight(0xffffff, 1.25);
         frontLight.position.set(0, 0.5, 2);
         this.scene?.add(frontLight);
+
+        const bottomLight = new THREE.DirectionalLight(0xffffff, 1.25);
+        bottomLight.position.set(0, -7, 0.5);
+        this.scene?.add(bottomLight);
 
         const backLight = new THREE.DirectionalLight(0xffffff, 1.25);
         backLight.position.set(0, 0.5, -2);
