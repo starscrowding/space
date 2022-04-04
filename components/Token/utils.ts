@@ -50,4 +50,11 @@ export const dataUrlToImageData = (dataUrl: string) => {
     });
 }
 
-
+export const metaToBlob = (meta: any) => {
+    const str = JSON.stringify(meta);
+    const bytes = new TextEncoder().encode(str);
+    const blob = new Blob([bytes], {
+        type: 'application/json;charset=utf-8'
+    });
+    return blob;
+};

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NextPage, NextPageContext } from 'next';
+import Image from 'next/image';
 import { Text } from '@nextui-org/react';
 import { isAdmin } from '@space/hooks/route';
 import { MintToken } from '@space/components/Token';
@@ -33,8 +34,8 @@ const Admin: NextPage = () => {
             {!mintMeta && <MintToken onNext={setMintMeta} />}
 
             {mintMeta && <div>
-                Head: <img src={mintMeta.head} />
-                Image: <img src={mintMeta.image} />
+                Head: <Image src={mintMeta.head} alt="head" width={300} height={300} />
+                Image: <Image src={mintMeta.image} alt="image" width={300} height={300} />
             </div>}
         </>}
 

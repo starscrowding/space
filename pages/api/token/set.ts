@@ -19,5 +19,5 @@ export default function handler(
       maxAge: 11 * 24 * 60 * 60,
     });
   }
-  res.status(200).json({ ok: isOK });
+  return res.status(200).json({ ok: isOK });
 }

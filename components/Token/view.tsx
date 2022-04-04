@@ -23,7 +23,7 @@ export const Token = ({ dataUrl, style, ctrl }: TokenProps) => {
                 }
             });
         }
-    }, [dataUrl]);
+    }, [dataUrl, ctrl]);
 
     return (
         <div ref={container} style={style} />

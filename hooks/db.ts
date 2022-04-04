@@ -13,10 +13,20 @@ export const toJSON = (data: any = '') => {
 };
 
 const StarsSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true,
+        index: true,
+        unique: true,
+    },
     name: {
         type: String,
         required: true,
         index: true
+    },
+    ipfs: {
+        type: String,
+        required: true,
     }
 });
 

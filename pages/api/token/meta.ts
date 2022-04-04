@@ -27,9 +27,10 @@ export default async function handler(
                 tokenType: 'erc1155'
 
             });
+            return res.status(200).json({ ok: !error, error, meta: result });
         } catch (e: any) {
             error = e?.message;
         }
     }
-    res.status(200).json({ ok: !error, error, meta: result });
+    return res.status(400).json({ ok: !error, error, meta: result });
 }

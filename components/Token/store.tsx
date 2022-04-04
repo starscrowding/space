@@ -1,7 +1,9 @@
 import { useState, useMemo, FormEvent } from 'react';
-import { NFTStorage } from 'nft.storage';
 import { Input } from '@nextui-org/react';
 import { BASE } from '@space/hooks/api';
+import { useNftStorage } from '@space/hooks/nft';
+import { metaToBlob } from '@space/components/Token';
+import { post, ENDPOINT } from '@space/hooks/api';
 
 interface StoreTokenProps {
     meta: {
@@ -21,6 +23,8 @@ export const StoreToken = ({ meta }: StoreTokenProps) => {
     const [name, setName] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [birthday, setBirthday] = useState<number>();
+    const nftStorage = useNftStorage(storeKey);
+    const [result, setResult] = useState();
 
     const metaData = useMemo(() => {
         return {
@@ -58,9 +62,20 @@ export const StoreToken = ({ meta }: StoreTokenProps) => {
         setDescription(`${n} token`);
     };
 
-    const onSubmit = (e: FormEvent) => {
+    const onSubmit = async (e: FormEvent) => {
         e && e.preventDefault();
-        console.log(metaData);
+        try {
+            const metaBlob = metaToBlob(metaData);
+            const ipfs = await nftStorage.storeBlob(metaBlob);
+            const res = await post(ENDPOINT.token.index, {
+                id: metaData.id,
+                name: metaData.name,
+                ipfs
+            });
+            setResult(res);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const isReady = !!(storeKey && meta?.image && meta?.head && name && id && description && birthday);
@@ -77,11 +92,16 @@ export const StoreToken = ({ meta }: StoreTokenProps) => {
             onBlur={() => setStoreKeyType('password')}
             onChange={e => updateStoreKey(e?.target?.value || '')} />
 
-        <form onSubmit={onSubmit}>
+        {!result && <form onSubmit={onSubmit}>
             <div>birthday: <input required type="datetime-local" onChange={e => updateBirthday(e.target.value)} /></div>
             <div>name: <input required onChange={e => updateName(e.target.value)} /></div>
             <pre>{JSON.stringify(metaData, null, 2)}</pre>
-            <button type="submit" disabled={!isReady} style={isReady ? { color: 'green' } : {}}>Submit</button>
-        </form>
+            <button type="submit" disabled={!isReady} style={isReady ? { color: 'gold' } : {}}>Submit</button>
+        </form>}
+
+        {result && <div>
+            <pre>{JSON.stringify(result, null, 2)}</pre>
+        </div>}
+
     </div>);
 }

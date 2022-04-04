@@ -1,18 +1,20 @@
-import { NextPageContext } from 'next';
+import { NextApiRequest, NextApiResponse, NextPageContext } from 'next';
 import Router from 'next/router';
 import { parseCookies } from 'nookies';
 import { validateToken } from './crypto';
 
+export type Context = NextPageContext | { req: NextApiRequest, res: NextApiResponse };
+
 interface useUserProps {
-    ctx: NextPageContext,
+    ctx: Context,
     redirectUrl?: string;
 }
 
-export const isSSR = (ctx: NextPageContext) => {
+export const isSSR = (ctx: Context) => {
     return ctx && ctx.req;
 };
 
-export const redirect = (ctx: NextPageContext) => ({
+export const redirect = (ctx: Context) => ({
     to: (url: string) => {
         console.log('redirect to: ', url);
         if (isSSR(ctx) && ctx.res) {
@@ -39,10 +41,10 @@ export const isAdmin = ({
         })) {
             return true;
         }
-        redirect(ctx).to(redirectUrl);
+        redirectUrl && redirect(ctx).to(redirectUrl);
         return false;
     } catch (e) {
-        redirect(ctx).to(redirectUrl);
+        redirectUrl && redirect(ctx).to(redirectUrl);
         return false;
     }
 };
