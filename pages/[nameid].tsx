@@ -1,12 +1,35 @@
 import { NextPageContext } from 'next';
 import Error from 'next/error';
-import { Stars, toJSON } from '@space/hooks/db';
+import { Loading } from "@nextui-org/react";
+import { Stars } from '@space/hooks/db';
+import { useStar } from '@space/hooks/store';
+import { Token } from '@space/components/Token';
+import styles from '../styles/token.module.scss';
 
-const Token = ({ star }: { star: any }) => {
-    if (!star) {
-        return <Error statusCode={404} />
+interface PageContext {
+    ipfs: string;
+    iframe: boolean;
+}
+
+const TokenPageContent = ({ ipfs }: PageContext) => {
+    const { star, error, loading } = useStar(ipfs);
+    if (error) {
+        return <Error statusCode={400} />;
     }
-    return <p>Token: {star?._id}</p>;
+    if (loading) {
+        return <div className={styles.loading}><Loading type="gradient" color="white" /></div>;
+    }
+    return (<div>
+        <Token dataUrl={star?.head} style={{ position: 'fixed', top: '0', bottom: '0', left: '0', right: '0' }} />
+    </div>);
+};
+
+const TokenPage = (ctx: PageContext) => {
+    const { ipfs } = ctx;
+    if (!ipfs) {
+        return <Error statusCode={404} />;
+    }
+    return <TokenPageContent {...ctx} />;
 }
 
 export async function getServerSideProps(context: NextPageContext) {
@@ -16,14 +39,17 @@ export async function getServerSideProps(context: NextPageContext) {
         const [name, id] = [split.shift(), split.join('')];
         const star = await Stars.findOne({ name, id });
         return {
-            props: { star: toJSON(star) },
+            props: {
+                ipfs: star?.ipfs || null,
+                iframe: context?.query?.i === '1'
+            },
         }
     } catch (e) {
         console.error(e);
         return {
-            props: { star: undefined },
+            props: { ipfs: null },
         }
     }
 }
 
-export default Token;
+export default TokenPage;

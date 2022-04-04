@@ -34,6 +34,8 @@ export const StoreToken = ({ meta }: StoreTokenProps) => {
             image: meta?.image,
             head: meta?.head,
             external_url: `${BASE}/${name}*${id}`,
+            animation_url: `${BASE}/${name}*${id}?i=1`,
+            background_color: '000000',
             attributes: [
                 {
                     display_type: 'date',
