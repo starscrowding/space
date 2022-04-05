@@ -3,38 +3,46 @@ import { isAdmin } from '@space/hooks/route';
 import { Stars, toJSON } from '@space/hooks/db';
 
 interface Result {
-    ok: boolean;
-    error?: string;
-    star?: Object;
+  ok: boolean;
+  error?: string;
+  star?: Object;
 }
 
 export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse<Result>
+  req: NextApiRequest,
+  res: NextApiResponse<Result>
 ) {
-    const admin = isAdmin({ ctx: { req, res } as any, redirectUrl: '' });
-    let error;
-    if (!!admin) {
-        switch (req.method) {
-            case 'GET':
-                const { id } = req?.query;
-                if (id) {
-                    const star = await Stars.findOne({ name: id });
-                    return res.status(200).json({ ok: !error, error, star: toJSON(star) });
-                } else {
-                    error = 'no id';
-                }
-            case 'POST':
-                const body = req?.body;
-                if (body) {
-                    const star = await Stars.create(body);
-                    return res.status(200).json({ ok: !error, error, star: toJSON(star) });
-                } else {
-                    error = 'no body';
-                }
-        }
-    } else {
-        error = 'for admin only';
+  const admin = isAdmin({ ctx: { req, res } as any, redirectUrl: '' });
+  let error;
+  if (!!admin) {
+    try {
+      switch (req.method) {
+        case 'GET':
+          const { id } = req?.query;
+          if (id) {
+            const star = await Stars.findOne({ name: id });
+            return res
+              .status(200)
+              .json({ ok: !error, error, star: toJSON(star) });
+          } else {
+            error = 'no id';
+          }
+        case 'POST':
+          const body = req?.body;
+          if (body) {
+            const star = await Stars.create(body);
+            return res
+              .status(200)
+              .json({ ok: !error, error, star: toJSON(star) });
+          } else {
+            error = 'no body';
+          }
+      }
+    } catch (e: any) {
+      error = e?.message;
     }
-    return res.status(400).json({ ok: !error, error });
+  } else {
+    error = 'for admin only';
+  }
+  return res.status(400).json({ ok: !error, error });
 }
