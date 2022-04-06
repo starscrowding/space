@@ -18,6 +18,7 @@
     "react": "17.0.2",
     "react-avatar-editor": "^12.0.0",
     "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
     "swr": "^1.2.2",
     "three": "^0.138.3"
   },

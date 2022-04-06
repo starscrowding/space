@@ -18,7 +18,7 @@
   display: flex;
   flex: 1;
   padding: 2rem 0;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid $border-color;
   justify-content: center;
   align-items: center;
 }
@@ -28,6 +28,10 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+}
+
+.shadow {
+  text-shadow: 2px 2px 7px $blue-color;
 }
 
 .title a {
@@ -42,8 +46,10 @@
 
 .title {
   margin: 0;
+  font-size: 1.5rem;
 
   a {
+    vertical-align: sub;
     margin-left: 0.123rem;
   }
 }
@@ -66,10 +72,6 @@
   font-size: 1.5rem;
 }
 
-.shadow {
-  text-shadow: 2px 2px 7px $blue-color;
-}
-
 .grid {
   display: flex;
   align-items: center;
@@ -84,7 +86,7 @@
   text-align: left;
   color: inherit;
   text-decoration: none;
-  border: 1px solid #eaeaea;
+  border: 1px solid $border-color;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
