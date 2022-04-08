@@ -2,7 +2,8 @@ import {FormEvent, useCallback, useState} from 'react';
 import {NextPage} from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import {Text, Input, StyledInput} from '@nextui-org/react';
+import Image from 'next/image';
+import {Text, Input} from '@nextui-org/react';
 import {GoTelescope} from 'react-icons/go';
 import classnames from 'classnames';
 import {IStar} from '@space/types';
@@ -13,10 +14,10 @@ import styles from '../styles/home.module.scss';
 const StarPreview = ({star}: {star: IStar}) => {
   const meta = useStar(star?.ipfs);
   const index = `${star.name}*${star.id}`;
-  return (
+  return !!meta?.star?.image ? (
     <Link href={`/${index}`}>
       <a className={styles.star}>
-        <img width="200px" src={meta?.star?.image} />
+        <Image width="200px" height="200px" src={meta?.star?.image} alt={meta?.star?.description} />
         <Text
           size="1.23rem"
           css={{
@@ -28,7 +29,7 @@ const StarPreview = ({star}: {star: IStar}) => {
         </Text>
       </a>
     </Link>
-  );
+  ) : null;
 };
 
 const Home: NextPage = () => {
@@ -67,17 +68,19 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <h1 className={styles.title}>
           welcome to{' '}
-          <a href="/">
-            <Text
-              css={{
-                display: 'inline',
-                textGradient: '45deg, $pink500 27%, $purple500 42%',
-              }}
-              weight="bold"
-            >
-              starscrowding
-            </Text>
-          </a>
+          <Link href="/">
+            <a>
+              <Text
+                css={{
+                  display: 'inline',
+                  textGradient: '45deg, $pink500 27%, $purple500 42%',
+                }}
+                weight="bold"
+              >
+                starscrowding
+              </Text>
+            </a>
+          </Link>
         </h1>
 
         <div className={styles.search}>
@@ -106,22 +109,22 @@ const Home: NextPage = () => {
 
         {!focus && !stars?.length && (
           <div className={styles.grid}>
-            <a href={ABOUT} target="_blank" className={styles.card}>
+            <a href={ABOUT} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>About 💫</h2>
               <p>Find in-depth information about personal tokens space.</p>
             </a>
 
-            <a href={FAQ} target="_blank" className={styles.card}>
+            <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>Charity 🎗️</h2>
               <p>How to use web3 and DeFi for the Good.</p>
             </a>
 
-            <a href={FAQ} target="_blank" className={styles.card}>
+            <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>Listings ✨</h2>
               <p>Everyone is a Star. Turn your audience into shareholders.</p>
             </a>
 
-            <a href={FAQ} target="_blank" className={styles.card}>
+            <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>Invest ⚡</h2>
               <p>Light up your Star. Earn by exchange your favorite tokens.</p>
             </a>
@@ -136,7 +139,7 @@ const Home: NextPage = () => {
       </p>
 
       <footer className={styles.footer}>
-        <a href={GITHUB} target="_blank" className={styles.shadow}>
+        <a href={GITHUB} target="_blank" rel="noreferrer" className={styles.shadow}>
           in code people trust 🚀
         </a>
       </footer>
