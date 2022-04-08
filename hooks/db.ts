@@ -28,6 +28,14 @@ const StarsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  network: {
+    type: Object,
+    required: false,
+  },
+  listed: {
+    type: Boolean,
+    required: false,
+  },
 });
 StarsSchema.index({name: 'text'});
 

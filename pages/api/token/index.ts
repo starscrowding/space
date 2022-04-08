@@ -15,8 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     try {
       switch (req.method) {
         case 'GET':
-          const id = req?.query?.id as string;
-          if (id) {
+          if (req.query?.id) {
+            const id = req.query.id.toString();
             const split = id.split('*');
             const star = await Stars.findOne({
               $or: [{id: +split[1] || +split[0] || 0}, {name: new RegExp(split[0])}],

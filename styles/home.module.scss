@@ -9,7 +9,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding-bottom: 3rem;
 }
@@ -52,6 +51,10 @@
     vertical-align: sub;
     margin-left: 0.123rem;
   }
+
+  p {
+    font-size: 4rem;
+  }
 }
 
 .title,
@@ -62,7 +65,7 @@
 .description {
   margin: 1rem 0;
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 1.23rem;
 }
 
 .code {
@@ -70,9 +73,16 @@
   color: $base-color;
   background: none;
   font-size: 1.5rem;
+  cursor: context-menu;
+}
+
+.search {
+  width: 650px;
+  margin: 0 0 1rem;
 }
 
 .grid {
+  animation: fadeIn 1s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,7 +127,17 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
+.stars {
+  text-align: center;
+}
+
+.star {
+  margin: 1rem;
+  text-align: center;
+  display: inline-block;
+}
+
+@media (max-width: 660px) {
   .grid {
     width: 100%;
     flex-direction: column;
@@ -127,5 +147,22 @@
     a {
       margin-left: 0;
     }
+
+    p {
+      font-size: 3rem;
+    }
+  }
+
+  .search {
+    width: 100%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

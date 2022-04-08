@@ -1,9 +1,13 @@
 export const BASE = 'https://starscrowding.com';
+export const ABOUT = 'https://starscrowding.notion.site/About-626a40b60976481a94dd6f47a538944f';
+export const FAQ = 'https://starscrowding.notion.site/FAQ-cf17bb2b4525417d80cf22a367523271';
+export const GITHUB = 'https://github.com/starscrowding/space';
 export const ENDPOINT = {
   ipfs: 'https://ipfs.io/ipfs',
   token: {
     index: '/api/token',
     set: '/api/token/set',
+    search: '/api/token/search',
   },
 };
 
