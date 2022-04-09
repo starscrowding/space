@@ -33,6 +33,7 @@ const StarPreview = ({star}: {star: IStar}) => {
 };
 
 const Home: NextPage = () => {
+  const [go, setGo] = useState(0);
   const [focus, setFocus] = useState(false);
   const [input, setInput] = useState<string>('');
   const [stars, setStars] = useState<[]>();
@@ -56,7 +57,6 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
         <link rel="canonical" href={BASE} />
         <title>strascrowding | tokens exchange space - grow * influence</title>
         <meta
@@ -134,13 +134,16 @@ const Home: NextPage = () => {
 
       <p className={styles.description}>
         Our mission is to <b>grow</b>{' '}
-        <code className={classnames(styles.code, styles.shadow)}>technologies</code> that allow
-        people to <b>influence</b> improvements
+        <code className={classnames(styles.code, styles.shadow)} onClick={() => setGo(go + 1)}>
+          technologies
+        </code>{' '}
+        that allow people to <b>influence</b> improvements
       </p>
 
       <footer className={styles.footer}>
         <a href={GITHUB} target="_blank" rel="noreferrer" className={styles.shadow}>
-          in code people trust 🚀
+          in code people trust{' '}
+          <span className={classnames(styles.rocket, {[styles.go]: go % 2})}>🚀</span>
         </a>
       </footer>
     </div>
