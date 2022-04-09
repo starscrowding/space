@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { formatImageData } from './utils';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
+import {formatImageData} from './utils';
 
 const RADIUS = 1;
 const SEGMENTS = 128;
@@ -41,26 +41,18 @@ export class TokenController {
   }
 
   zoom() {
-    if (
-      this.camera &&
-      this.container.clientWidth < this.imageData.width * 1.5
-    ) {
-      this.camera.zoom =
-        this.container.clientWidth / this.imageData.width / 1.5;
+    if (this.camera && this.container.clientWidth < this.imageData.width * 1.5) {
+      this.camera.zoom = this.container.clientWidth / this.imageData.width / 1.5;
       this.camera.updateProjectionMatrix();
     }
   }
 
   resize() {
     if (this.camera) {
-      this.camera.aspect =
-        this.container.clientWidth / this.container.clientHeight;
+      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
       this.camera.updateProjectionMatrix();
     }
-    this.renderer?.setSize(
-      this.container.clientWidth,
-      this.container.clientHeight
-    );
+    this.renderer?.setSize(this.container.clientWidth, this.container.clientHeight);
   }
 
   initRenderer() {
@@ -91,19 +83,14 @@ export class TokenController {
   initTokenRing() {
     const scene = this.scene;
 
-    const ringGeometry = new THREE.RingBufferGeometry(
-      RADIUS,
-      RADIUS + THICKNESS / 2,
-      SEGMENTS,
-      1
-    );
+    const ringGeometry = new THREE.RingBufferGeometry(RADIUS, RADIUS + THICKNESS / 2, SEGMENTS, 1);
 
     const frontRing = new THREE.Mesh(ringGeometry, this.material);
-    frontRing.position.z = THICKNESS / 2 + 0.003;
+    frontRing.position.z = THICKNESS / 2 + 0.0033;
     scene?.add(frontRing);
 
     const backRing = frontRing.clone();
-    backRing.position.z = -THICKNESS / 2 - 0.003;
+    backRing.position.z = -THICKNESS / 2 - 0.0033;
     backRing.rotateY(Math.PI);
     scene?.add(backRing);
 
@@ -134,10 +121,7 @@ export class TokenController {
     texture.needsUpdate = true;
     texture.flipY = true;
 
-    const circleGeometry = new THREE.CircleBufferGeometry(
-      RADIUS + THICKNESS / 4,
-      SEGMENTS
-    );
+    const circleGeometry = new THREE.CircleBufferGeometry(RADIUS + THICKNESS / 4, SEGMENTS);
 
     const circleMaterial = this.material?.clone();
     Object.assign(circleMaterial, {
