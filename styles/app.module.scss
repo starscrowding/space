@@ -1,6 +1,7 @@
 @import './variables.module.scss';
 
 .space {
+  overflow: hidden;
   position: relative;
   z-index: 1;
   padding: 0;

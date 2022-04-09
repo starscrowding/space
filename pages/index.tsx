@@ -143,8 +143,8 @@ const Home: NextPage = () => {
       <footer className={styles.footer}>
         <a href={GITHUB} target="_blank" rel="noreferrer" className={styles.shadow}>
           in code people trust{' '}
-          <span className={classnames(styles.rocket, {[styles.go]: go % 2})}>🚀</span>
         </a>
+        <i className={classnames(styles.rocket, {[styles.go]: go % 2})}>🚀</i>
       </footer>
     </div>
   );
