@@ -12,7 +12,7 @@ class SpaceDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" style={{background: '#000000'}}>
         <Head>
           <link rel="icon" href="/favicon.ico" />
           {CssBaseline.flush()}
