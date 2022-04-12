@@ -1,8 +1,30 @@
 .loading {
-    position: fixed;
-    top: 47%;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    text-align: center;
+  position: fixed;
+  top: 47%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+
+.container {
+  height: 100vh;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.main {
+  z-index: 1;
+  position: relative;
+}
+
+.logo {
+  cursor: help;
+
+  p {
+    font-size: 1.23rem;
+  }
 }

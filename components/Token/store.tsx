@@ -28,7 +28,7 @@ export const StoreToken = ({meta}: StoreTokenProps) => {
   const [ipfs, setIpfs] = useState<string>();
   const [preloadIpfs, setPreloadIpfs] = useState<string>();
   const [dbSearch, setDbSearch] = useState<string>();
-  const [dbResult, setDbResult] = useState();
+  const [dbResult, setDbResult] = useState<any>();
   const [dbResultAsText, setDbResultAsText] = useState<string>();
 
   const metaData = useMemo(() => {
@@ -234,6 +234,22 @@ export const StoreToken = ({meta}: StoreTokenProps) => {
           )}
           {dbResult && (
             <div>
+              <a
+                style={{margin: '1rem'}}
+                href={`${BASE}/${dbResult?.star?.name}*${dbResult?.star?.id}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                STAR
+              </a>
+              <a
+                style={{margin: '1rem'}}
+                href={`${ENDPOINT.ipfs}/${dbResult?.star?.ipfs}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                IPFS
+              </a>
               <div>
                 <textarea
                   value={dbResultAsText}

@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (!error) {
     try {
       const split = q.split('*');
-      const pattern = (split[0] || '').replace(' ', '|');
+      const pattern = (split[0] || '').toLowerCase().replace(' ', '|');
       result = await Stars.find({name: new RegExp(pattern), listed: true}).limit(10);
       return res.status(200).json({ok: !error, error, stars: toJSON(result)});
     } catch (e) {

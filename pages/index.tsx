@@ -3,12 +3,13 @@ import {NextPage} from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-import {Text, Input} from '@nextui-org/react';
 import {GoTelescope} from 'react-icons/go';
 import classnames from 'classnames';
+import {Text, Input} from '@nextui-org/react';
 import {IStar} from '@space/types';
 import {api, ENDPOINT, BASE, ABOUT, FAQ, GITHUB} from '@space/hooks/api';
 import {useStar} from '@space/hooks/store';
+import {Logo} from '@space/components/Logo';
 import styles from '../styles/home.module.scss';
 
 const StarPreview = ({star}: {star: IStar}) => {
@@ -67,22 +68,8 @@ const Home: NextPage = () => {
       </Head>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          welcome to{' '}
-          <Link href="/">
-            <a>
-              <Text
-                css={{
-                  display: 'inline',
-                  textGradient: '45deg, $pink500 27%, $purple500 42%',
-                }}
-                weight="bold"
-              >
-                starscrowding
-              </Text>
-            </a>
-          </Link>
+          welcome to <Logo />
         </h1>
-
         <div className={styles.search}>
           <form onSubmit={onSearch}>
             <Input
