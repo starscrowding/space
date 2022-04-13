@@ -90,8 +90,15 @@
   }
 }
 
+.play {
+  position: absolute;
+  margin: auto;
+  top: 40%;
+}
+
 .grid {
   animation: fadeIn 1s;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,10 +152,16 @@
   display: inline-block;
 }
 
-@media (max-width: 660px) {
+@media (max-width: 728px) {
+  .play {
+    position: relative;
+    top: 0;
+  }
+
   .grid {
     width: 100%;
     flex-direction: column;
+    padding-bottom: 3rem;
   }
 
   .title {

@@ -10,6 +10,7 @@ import {IStar} from '@space/types';
 import {api, ENDPOINT, BASE, ABOUT, FAQ, GITHUB} from '@space/hooks/api';
 import {useStar} from '@space/hooks/store';
 import {Logo} from '@space/components/Logo';
+import {Play} from '@space/components/Play';
 import styles from '../styles/home.module.scss';
 
 const StarPreview = ({star}: {star: IStar}) => {
@@ -96,6 +97,7 @@ const Home: NextPage = () => {
 
         {!focus && !stars?.length && (
           <div className={styles.grid}>
+            <Play className={styles.play} />
             <a href={ABOUT} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>About 💫</h2>
               <p>Find in-depth information about personal tokens space.</p>
