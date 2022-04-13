@@ -21,7 +21,7 @@ export const Play = ({className}: {className?: string}) => {
         onClose={() => setVisible(false)}
       >
         <Modal.Body>
-          <video className={styles.video} controls autoPlay>
+          <video className={styles.video} controls autoPlay playsInline>
             <source src="/intro.mp4" type="video/mp4" />
           </video>
         </Modal.Body>
