@@ -44,7 +44,7 @@ const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
             <main className={styles.container}>
               <Logo className={classnames(styles.main, styles.logo)} />
               {listed && (
-                <Link href={`${OPENSEA}/${star.id}`}>
+                <Link href={`${OPENSEA}/${Math.abs(star.id)}`}>
                   <a target="_blank">
                     <Button id="offer" shadow color="gradient" auto className={styles.main}>
                       Buy / Sell
