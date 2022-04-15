@@ -3,6 +3,8 @@ export const ABOUT = 'https://starscrowding.notion.site/About-626a40b60976481a94
 export const FAQ = 'https://starscrowding.notion.site/FAQ-cf17bb2b4525417d80cf22a367523271';
 export const GITHUB = 'https://github.com/starscrowding/space';
 export const OPENSEA = 'https://opensea.io/assets/matic/0xf2e805a8773e991cdee1a7e44e54eb238f2a2f07';
+export const COLLECTION = 'https://opensea.io/collection/starscrowding';
+export const FORM = 'https://forms.gle/AKtu2MF6NQXWAEcu5';
 export const ENDPOINT = {
   ipfs: 'https://ipfs.io/ipfs',
   token: {

@@ -7,7 +7,7 @@ import {GoTelescope} from 'react-icons/go';
 import classnames from 'classnames';
 import {Text, Input} from '@nextui-org/react';
 import {IStar} from '@space/types';
-import {api, ENDPOINT, BASE, ABOUT, FAQ, GITHUB} from '@space/hooks/api';
+import {api, ENDPOINT, BASE, ABOUT, FAQ, GITHUB, COLLECTION, FORM} from '@space/hooks/api';
 import {useStar} from '@space/hooks/store';
 import {Logo} from '@space/components/Logo';
 import {Play} from '@space/components/Play';
@@ -108,12 +108,12 @@ const Home: NextPage = () => {
               <p>How to use web3 and DeFi for the Good.</p>
             </a>
 
-            <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
+            <a href={FORM} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>Listings ✨</h2>
               <p>Everyone is a Star. Turn your audience into shareholders.</p>
             </a>
 
-            <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
+            <a href={COLLECTION} target="_blank" rel="noreferrer" className={styles.card}>
               <h2>Invest ⚡</h2>
               <p>Light up your Star. Earn by exchange your favorite tokens.</p>
             </a>
