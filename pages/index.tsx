@@ -60,7 +60,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Head>
         <link rel="canonical" href={BASE} />
-        <title>strascrowding | tokens exchange space - grow * influence</title>
+        <title>starscrowding | tokens exchange space - grow * influence</title>
         <meta
           name="description"
           content="Tech company that drives improvements via web3 and blockchain."

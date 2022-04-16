@@ -31,7 +31,7 @@ const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
   }
   if (star) {
     const index = `${star.name}*${star.id}`;
-    const title = `${star.name} | strascrowding`;
+    const title = `${star.name} | starscrowding`;
     return (
       <div>
         {!iframe && (
