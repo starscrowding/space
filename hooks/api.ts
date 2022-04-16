@@ -11,6 +11,7 @@ export const ENDPOINT = {
     index: '/api/token',
     set: '/api/token/set',
     search: '/api/token/search',
+    img: '/api/token/img',
   },
 };
 

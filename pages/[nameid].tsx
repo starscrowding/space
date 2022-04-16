@@ -7,7 +7,7 @@ import {Loading, Button} from '@nextui-org/react';
 import {Stars} from '@space/hooks/db';
 import {useStar} from '@space/hooks/store';
 import {Token} from '@space/components/Token';
-import {BASE, OPENSEA} from '@space/hooks/api';
+import {BASE, ENDPOINT, OPENSEA} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import styles from '../styles/token.module.scss';
 
@@ -31,15 +31,18 @@ const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
   }
   if (star) {
     const index = `${star.name}*${star.id}`;
+    const title = `${star.name} | strascrowding`;
     return (
       <div>
         {!iframe && (
           <>
             <Head>
               <link rel="canonical" href={`${BASE}/${index}`} />
-              <title>{`${star.name} | strascrowding`}</title>
+              <title>{title}</title>
               <meta name="description" content={star.description} />
-              <meta property="og:image" content={star.image} />
+              <meta property="og:image" content={`${ENDPOINT.token.img}/${ipfs}`} />
+              <meta property="og:title" content={title} />
+              <meta property="og:description" content={star.description} />
             </Head>
             <main className={styles.container}>
               <Logo className={classnames(styles.main, styles.logo)} />
