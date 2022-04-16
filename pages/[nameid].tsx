@@ -72,7 +72,7 @@ const TokenPage = (ctx: PageContext) => {
         <link rel="canonical" href={`${BASE}/${index}`} />
         <title>{title}</title>
         <meta name="description" content={description} />
-        <meta property="og:image" content={`${ENDPOINT.token.img}/${ipfs}`} />
+        <meta property="og:image" content={`${BASE}${ENDPOINT.token.img}/${ipfs}`} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
       </Head>
