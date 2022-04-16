@@ -57,7 +57,7 @@ const Home: NextPage = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <link rel="canonical" href={BASE} />
         <title>starscrowding | tokens exchange space - grow * influence</title>
@@ -67,75 +67,77 @@ const Home: NextPage = () => {
         />
         <meta property="og:image" content={`${BASE}/icon.png`} />
       </Head>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          welcome to <Logo />
-        </h1>
-        <div className={styles.search}>
-          <form onSubmit={onSearch}>
-            <Input
-              id="search"
-              bordered
-              width="100%"
-              color="primary"
-              placeholder="Look for Star tokens"
-              onFocus={() => setFocus(true)}
-              onBlur={() => setFocus(false)}
-              onChange={e => setInput(e?.target?.value || '')}
-              contentLeft={<GoTelescope size="17" />}
-            />
-          </form>
-        </div>
-
-        {!!stars?.length && (
-          <div className={styles.stars}>
-            {stars.map((star: any, index: number) => {
-              return <StarPreview key={index} star={star} />;
-            })}
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <h1 className={styles.title}>
+            welcome to <Logo />
+          </h1>
+          <div className={styles.search}>
+            <form onSubmit={onSearch}>
+              <Input
+                id="search"
+                bordered
+                width="100%"
+                color="primary"
+                placeholder="Look for Star tokens"
+                onFocus={() => setFocus(true)}
+                onBlur={() => setFocus(false)}
+                onChange={e => setInput(e?.target?.value || '')}
+                contentLeft={<GoTelescope size="17" />}
+              />
+            </form>
           </div>
-        )}
 
-        {!focus && !stars?.length && (
-          <div className={styles.grid}>
-            <Play className={styles.play} />
-            <a href={ABOUT} target="_blank" rel="noreferrer" className={styles.card}>
-              <h2>About 💫</h2>
-              <p>Find in-depth information about personal tokens space.</p>
-            </a>
+          {!!stars?.length && (
+            <div className={styles.stars}>
+              {stars.map((star: any, index: number) => {
+                return <StarPreview key={index} star={star} />;
+              })}
+            </div>
+          )}
 
-            <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
-              <h2>Charity 🎗️</h2>
-              <p>How to use web3 and DeFi for the Good.</p>
-            </a>
+          {!focus && !stars?.length && (
+            <div className={styles.grid}>
+              <Play className={styles.play} />
+              <a href={ABOUT} target="_blank" rel="noreferrer" className={styles.card}>
+                <h2>About 💫</h2>
+                <p>Find in-depth information about personal tokens space.</p>
+              </a>
 
-            <a href={FORM} target="_blank" rel="noreferrer" className={styles.card}>
-              <h2>Listings ✨</h2>
-              <p>Everyone is a Star. Turn your audience into shareholders.</p>
-            </a>
+              <a href={FAQ} target="_blank" rel="noreferrer" className={styles.card}>
+                <h2>Charity 🎗️</h2>
+                <p>How to use web3 and DeFi for the Good.</p>
+              </a>
 
-            <a href={COLLECTION} target="_blank" rel="noreferrer" className={styles.card}>
-              <h2>Invest ⚡</h2>
-              <p>Light up your Star. Earn by exchange your favorite tokens.</p>
-            </a>
-          </div>
-        )}
-      </main>
+              <a href={FORM} target="_blank" rel="noreferrer" className={styles.card}>
+                <h2>Listings ✨</h2>
+                <p>Everyone is a Star. Turn your audience into shareholders.</p>
+              </a>
 
-      <p className={styles.description}>
-        Our mission is to <b>grow</b>{' '}
-        <code className={classnames(styles.code, styles.shadow)} onClick={() => setGo(go + 1)}>
-          technologies
-        </code>{' '}
-        that allow people to <b>influence</b> improvements
-      </p>
+              <a href={COLLECTION} target="_blank" rel="noreferrer" className={styles.card}>
+                <h2>Invest ⚡</h2>
+                <p>Light up your Star. Earn by exchange your favorite tokens.</p>
+              </a>
+            </div>
+          )}
+        </main>
 
-      <footer className={styles.footer}>
-        <a href={GITHUB} target="_blank" rel="noreferrer" className={styles.shadow}>
-          in code people trust{' '}
-        </a>
-        <i className={classnames(styles.rocket, {[styles.go]: go % 2})}>🚀</i>
-      </footer>
-    </div>
+        <p className={styles.description}>
+          Our mission is to <b>grow</b>{' '}
+          <code className={classnames(styles.code, styles.shadow)} onClick={() => setGo(go + 1)}>
+            technologies
+          </code>{' '}
+          that allow people to <b>influence</b> improvements
+        </p>
+
+        <footer className={styles.footer}>
+          <a href={GITHUB} target="_blank" rel="noreferrer" className={styles.shadow}>
+            in code people trust{' '}
+          </a>
+          <i className={classnames(styles.rocket, {[styles.go]: go % 2})}>🚀</i>
+        </footer>
+      </div>
+    </>
   );
 };
 

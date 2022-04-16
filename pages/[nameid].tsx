@@ -13,6 +13,8 @@ import styles from '../styles/token.module.scss';
 
 interface PageContext {
   ipfs: string;
+  name: string;
+  id: string;
   iframe: boolean;
   listed: boolean;
 }
@@ -30,33 +32,21 @@ const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
     );
   }
   if (star) {
-    const index = `${star.name}*${star.id}`;
-    const title = `${star.name} | starscrowding`;
     return (
       <div>
         {!iframe && (
-          <>
-            <Head>
-              <link rel="canonical" href={`${BASE}/${index}`} />
-              <title>{title}</title>
-              <meta name="description" content={star.description} />
-              <meta property="og:image" content={`${ENDPOINT.token.img}/${ipfs}`} />
-              <meta property="og:title" content={title} />
-              <meta property="og:description" content={star.description} />
-            </Head>
-            <main className={styles.container}>
-              <Logo className={classnames(styles.main, styles.logo)} />
-              {listed && (
-                <Link href={`${OPENSEA}/${Math.abs(star.id)}`}>
-                  <a target="_blank">
-                    <Button id="offer" shadow color="gradient" auto className={styles.main}>
-                      Buy / Sell
-                    </Button>
-                  </a>
-                </Link>
-              )}
-            </main>
-          </>
+          <main className={styles.container}>
+            <Logo className={classnames(styles.main, styles.logo)} />
+            {listed && (
+              <Link href={`${OPENSEA}/${Math.abs(star.id)}`}>
+                <a target="_blank">
+                  <Button id="offer" shadow color="gradient" auto className={styles.main}>
+                    Buy / Sell
+                  </Button>
+                </a>
+              </Link>
+            )}
+          </main>
         )}
         <Token
           dataUrl={star?.head}
@@ -69,11 +59,26 @@ const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
 };
 
 const TokenPage = (ctx: PageContext) => {
-  const {ipfs} = ctx;
+  const {ipfs, name, id} = ctx;
   if (!ipfs) {
     return <Error statusCode={404} />;
   }
-  return <TokenPageContent {...ctx} />;
+  const index = `${name}*${id}`;
+  const title = `${name} | starscrowding`;
+  const description = `${name} token`;
+  return (
+    <>
+      <Head>
+        <link rel="canonical" href={`${BASE}/${index}`} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:image" content={`${ENDPOINT.token.img}/${ipfs}`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+      </Head>
+      <TokenPageContent {...ctx} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context: NextPageContext) {
@@ -85,6 +90,8 @@ export async function getServerSideProps(context: NextPageContext) {
     return {
       props: {
         ipfs: star?.ipfs || null,
+        name: star?.name || '',
+        id: star?.id || '',
         listed: star?.listed || false,
         iframe: context?.query?.i === '1',
       },
