@@ -1,3 +1,4 @@
+import {useEffect, useState} from 'react';
 import {NextPageContext} from 'next';
 import classnames from 'classnames';
 import Error from 'next/error';
@@ -7,7 +8,7 @@ import {Loading, Button} from '@nextui-org/react';
 import {Stars} from '@space/hooks/db';
 import {useStar} from '@space/hooks/store';
 import {Token} from '@space/components/Token';
-import {BASE, ENDPOINT, OPENSEA} from '@space/hooks/api';
+import {BASE, ENDPOINT, OPENSEA, POOL, GRAVITY_CONTRACT} from '@space/hooks/api';
 import {Logo} from '@space/components/Logo';
 import styles from '../styles/token.module.scss';
 
@@ -21,6 +22,16 @@ interface PageContext {
 
 const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
   const {star, error, loading} = useStar(ipfs);
+  const [gravity, setGravity] = useState<number>();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const timestamp = Math.floor(Date.now() / 1000);
+      setGravity((timestamp - star?.id) / 10 ** 6);
+    }, 1234);
+    return () => clearInterval(interval);
+  }, [star]);
+
   if (error) {
     return <Error statusCode={400} />;
   }
@@ -35,16 +46,41 @@ const TokenPageContent = ({ipfs, iframe, listed}: PageContext) => {
     return (
       <div>
         {!iframe && (
-          <main className={styles.container}>
-            <Logo className={classnames(styles.main, styles.logo)} />
-            {listed && (
-              <Link href={`${OPENSEA}/${Math.abs(star.id)}`}>
-                <a target="_blank">
-                  <Button id="offer" shadow color="gradient" auto className={styles.main}>
-                    Buy / Sell
-                  </Button>
+          <main className={styles.main}>
+            <div className={styles.container}>
+              <Logo className={classnames(styles.top, styles.logo)} />
+              {listed && (
+                <Link href={`${OPENSEA}/${Math.abs(star.id)}`}>
+                  <a target="_blank">
+                    <Button id="offer" shadow color="gradient" auto className={styles.top}>
+                      Buy / Sell
+                    </Button>
+                  </a>
+                </Link>
+              )}
+            </div>
+            {gravity && (
+              <div className={styles.top}>
+                <a
+                  href={POOL}
+                  title="Price"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{color: 'gold'}}
+                >
+                  Gravity
                 </a>
-              </Link>
+                :{' '}
+                <a
+                  href={`${GRAVITY_CONTRACT}#writeContract`}
+                  title="Mining"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{color: 'silver'}}
+                >
+                  {gravity}
+                </a>
+              </div>
             )}
           </main>
         )}

@@ -1,4 +1,4 @@
-import {FormEvent, useCallback, useState} from 'react';
+import {FormEvent, useCallback, useEffect, useState} from 'react';
 import {NextPage} from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -37,11 +37,11 @@ const StarPreview = ({star}: {star: IStar}) => {
 const Home: NextPage = () => {
   const [go, setGo] = useState(0);
   const [focus, setFocus] = useState(false);
-  const [input, setInput] = useState<string>('');
+  const [input, setInput] = useState<string>('.');
   const [stars, setStars] = useState<[]>();
 
   const onSearch = useCallback(
-    async (e: FormEvent) => {
+    async (e?: FormEvent) => {
       e?.preventDefault?.();
       let _stars = [];
       try {
@@ -56,6 +56,12 @@ const Home: NextPage = () => {
     [input]
   );
 
+  useEffect(() => {
+    if (focus && !stars?.length) {
+      onSearch();
+    }
+  }, [focus]);
+
   return (
     <>
       <Head>
@@ -69,7 +75,7 @@ const Home: NextPage = () => {
       </Head>
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>
+          <h1 className={styles.title} onClick={() => setStars(undefined)}>
             welcome to <Logo />
           </h1>
           <div className={styles.search}>
@@ -82,7 +88,7 @@ const Home: NextPage = () => {
                 placeholder="Look for Star tokens"
                 onFocus={() => setFocus(true)}
                 onBlur={() => setFocus(false)}
-                onChange={e => setInput(e?.target?.value || '')}
+                onChange={e => setInput(e?.target?.value || '.')}
                 contentLeft={<GoTelescope size="17" />}
               />
             </form>
