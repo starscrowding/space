@@ -137,6 +137,10 @@
   line-height: 1.5;
 }
 
+.tag {
+  color: $base-color;
+}
+
 .logo {
   height: 1em;
   margin-left: 0.5rem;
@@ -150,6 +154,12 @@
   margin: 1rem;
   text-align: center;
   display: inline-block;
+
+  &.loading {
+    width: 250px;
+    height: 250px;
+    padding-top: 50px;
+  }
 }
 
 @media (max-width: 728px) {

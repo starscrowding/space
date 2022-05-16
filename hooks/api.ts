@@ -1,5 +1,6 @@
 export const BASE = 'https://starscrowding.com';
 export const ABOUT = 'https://starscrowding.notion.site/About-626a40b60976481a94dd6f47a538944f';
+export const WHITEPAPER = 'https://www.canva.com/design/DAFAfBQ0U1k/wY6y6w9qfOJzGLNiXugWrA/view';
 export const FAQ = 'https://starscrowding.notion.site/FAQ-cf17bb2b4525417d80cf22a367523271';
 export const GITHUB = 'https://github.com/starscrowding/space';
 export const OPENSEA = 'https://opensea.io/assets/matic/0xf2e805a8773e991cdee1a7e44e54eb238f2a2f07';
