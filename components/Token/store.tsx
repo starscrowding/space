@@ -1,6 +1,6 @@
 import {useState, useMemo, FormEvent} from 'react';
 import {Input} from '@nextui-org/react';
-import {BASE} from '@space/hooks/api';
+import {BASE, STARS_CONTRACT} from '@space/hooks/api';
 import {useNftStorage} from '@space/hooks/nft';
 import {metaToBlob} from '@space/components/Token';
 import {api, post, ENDPOINT} from '@space/hooks/api';
@@ -30,6 +30,7 @@ export const StoreToken = ({meta}: StoreTokenProps) => {
   const [dbSearch, setDbSearch] = useState<string>();
   const [dbResult, setDbResult] = useState<any>();
   const [dbResultAsText, setDbResultAsText] = useState<string>();
+  const [wallet, setWallet] = useState<{name: string; address: string; key: string}>();
 
   const metaData = useMemo(() => {
     return {
@@ -133,6 +134,15 @@ export const StoreToken = ({meta}: StoreTokenProps) => {
     }
   };
 
+  const requestWallet = async () => {
+    const res = await api(ENDPOINT.token.wallet);
+    setWallet({
+      name: dbResult ? `${dbResult?.star?.name}*${dbResult?.star?.id}` : '',
+      address: res?.wallet?.address,
+      key: res?.wallet?.key,
+    });
+  };
+
   const isReady = !!(storeKey && id && name && description && image && head && birthday);
 
   return (
@@ -140,6 +150,7 @@ export const StoreToken = ({meta}: StoreTokenProps) => {
       <div>
         <button onClick={() => setStep('nft')}>NFT</button>
         <button onClick={() => setStep('db')}>DB</button>
+        <button onClick={() => setStep('blockchain')}>Blockchain</button>
       </div>
       {step === 'nft' && (
         <>
@@ -263,6 +274,25 @@ export const StoreToken = ({meta}: StoreTokenProps) => {
                   Save
                 </button>
               )}
+            </div>
+          )}
+        </>
+      )}
+
+      {step === 'blockchain' && (
+        <>
+          <button onClick={requestWallet}>Request wallet</button>
+          <a
+            style={{margin: '1rem'}}
+            href={`${STARS_CONTRACT}#writeContract`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Contract
+          </a>
+          {wallet && (
+            <div>
+              <pre>{JSON.stringify(wallet, null, 2)}</pre>
             </div>
           )}
         </>

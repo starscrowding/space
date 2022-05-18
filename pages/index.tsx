@@ -77,7 +77,7 @@ const Home: NextPage = () => {
     if (focus && !stars?.length) {
       onSearch();
     }
-  }, [focus]);
+  }, [focus, stars, onSearch]);
 
   return (
     <>

@@ -6,6 +6,8 @@ export const GITHUB = 'https://github.com/starscrowding/space';
 export const OPENSEA = 'https://opensea.io/assets/matic/0xf2e805a8773e991cdee1a7e44e54eb238f2a2f07';
 export const COLLECTION = 'https://opensea.io/collection/starscrowding';
 export const FORM = 'https://forms.gle/AKtu2MF6NQXWAEcu5';
+export const STARS_CONTRACT =
+  'https://polygonscan.com/address/0xf2e805a8773e991cdee1a7e44e54eb238f2a2f07';
 export const GRAVITY_CONTRACT =
   'https://polygonscan.com/address/0x0Cb15eE96f7b75A40B5e182F30Da762Fb616F793';
 export const POOL = 'https://app.uniswap.org/#/pool/112088?chain=polygon';
@@ -16,6 +18,7 @@ export const ENDPOINT = {
     set: '/api/token/set',
     search: '/api/token/search',
     img: '/api/token/img',
+    wallet: 'api/token/wallet',
   },
 };
 
