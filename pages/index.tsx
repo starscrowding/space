@@ -118,7 +118,7 @@ const Home: NextPage = () => {
           </div>
 
           {!!stars?.length && (
-            <div className={styles.stars}>
+            <div className={classnames(styles.grid, styles.stars)}>
               {stars.map((star: any, index: number) => {
                 return <StarPreview key={index} star={star} />;
               })}

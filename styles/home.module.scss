@@ -154,9 +154,9 @@
   margin: 1rem;
   text-align: center;
   display: inline-block;
+  min-width: 300px;
 
   &.loading {
-    width: 250px;
     height: 250px;
     padding-top: 50px;
   }
