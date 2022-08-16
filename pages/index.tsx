@@ -172,7 +172,13 @@ const Home: NextPage = () => {
         </p>
 
         <footer className={styles.footer}>
-          <a href={GITHUB} target="_blank" rel="noreferrer" className={styles.shadow}>
+          <a
+            href={GITHUB}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.shadow}
+            title="verify"
+          >
             in code people trust{' '}
           </a>
           <i className={classnames(styles.rocket, {[styles.go]: go % 2})}>🚀</i>
