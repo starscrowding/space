@@ -12,7 +12,7 @@
     "classnames": "^2.3.1",
     "crypto-js": "^4.1.1",
     "mongoose": "^6.11.3",
-    "next": "12.1.0",
+    "next": "13.5.1",
     "next-themes": "^0.0.15",
     "nft.storage": "^6.1.0",
     "nookies": "^2.5.2",
