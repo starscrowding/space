@@ -1,7 +1,3 @@
-## About `starscrowding`
-
-- https://starscrowding.com/
-
 ## Contracts
 
 - Stars: https://polygonscan.com/address/0xf2e805a8773e991cdee1a7e44e54eb238f2a2f07#code
